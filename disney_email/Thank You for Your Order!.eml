@@ -1,0 +1,1364 @@
+Delivered-To: daniel.garciabarnett@gmail.com
+Received: by 2002:a05:7022:5e06:b0:76:864a:d6b6 with SMTP id pn6csp859028dlb;
+        Wed, 30 Aug 2023 07:14:33 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGFxhLjJzbL43eCRU80Bl8eYav8WZ2z3SfMiaSkYK/sW2c2nJg22Hz3zgm+5mIZj2oY1RbD
+X-Received: by 2002:a17:902:c951:b0:1dd:b3e0:519d with SMTP id i17-20020a170902c95100b001ddb3e0519dmr3793916pla.6.1710252872785;
+        Wed, 30 Aug 2023 07:14:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1710252872; cv=none;
+        d=google.com; s=arc-20160816;
+        b=ClSYN6pGBJP+aSDAB3HH+ByfHfgaj0+8AF07Chv5EJhmkDqzU8XJJBy+4xDY+mg7Mt
+         e5HsSxQopqUR7Y5Fvy9bVR8mXaPZ7XI71h9umrD6vFddUeqfazXHqeqLl7GDDxbHhssc
+         a6MKCzylIgSPatghAd+PXkwoTy4Azi2NoLhsbe3cHaDxL/lvbj2GJEjbOK7Z8t7dBIlQ
+         A4zYd0TlVvlTX96AiwCT75Rb9+5NeXFN4qSJzcv5GPOS/+28W/5n3lNNeudW2D8nOt7a
+         UyC8mGiISDfj34u3EIV8UJkpWkcuABYyLyiGKrofaJWZFfGex1oEvf8Yjzp/YQPCvUGe
+         tuPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:subject:message-id:to:from:date:dkim-signature;
+        bh=L2Hn3ALTP65yQaSkDO/rxIG16sEA79i1YpSOmh1P7YM=;
+        fh=+KH4iK/bV5prbtj+FBKTKBzWEm877CCIxIdYrlkIBJo=;
+        b=lql8UmLtFBMGntz0AnihufhCycRuAoNHOSDVuF3VVg7lQ6e7zZFR7sX6g6YktPagn6
+         C/OmJIzn7VZ5QFZl4lqBtPiPUW7wrjOncmTNKVVD5Zk8+rNA3vWiqq/Z/6Sj24ktvqIv
+         66han6GRmix5NjTcTEzkfB8t4egZUWtLH8hprP7+kgj6PQXAKM524EcAlcrAE20pcpBU
+         e2jbjZc6JC5YY/UMpu4wAaEnP4Y7cqSzo06ZgZSzkS1+m2GXw4qkMF1A9VIbc4p648u3
+         cWIYiJB+MoEGTkz9NsxlMzNMZavO0OR9l5ul1JfqHh4y8z+8loLisy+ns0724f1ttdjA
+         R9cw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@disneystore.com header.s=sfcc-prod-s1 header.b=gNMrpPP7;
+       spf=pass (google.com: domain of guest.services@disneystore.com designates 13.110.178.17 as permitted sender) smtp.mailfrom=guest.services@disneystore.com
+Return-Path: <guest.services@disneystore.com>
+Received: from production.na01.disney.demandware.net (production.na01.disney.demandware.net. [13.110.178.17])
+        by mx.google.com with ESMTPS id t8-20020a170902e84800b001dd6bf2d4b2si5860173plg.631.2024.03.12.07.14.32
+        for <daniel.garciabarnett@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 30 Aug 2023 07:14:32 -0700 (PDT)
+Received-SPF: pass (google.com: domain of guest.services@disneystore.com designates 13.110.178.17 as permitted sender) client-ip=13.110.178.17;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@disneystore.com header.s=sfcc-prod-s1 header.b=gNMrpPP7;
+       spf=pass (google.com: domain of guest.services@disneystore.com designates 13.110.178.17 as permitted sender) smtp.mailfrom=guest.services@disneystore.com
+Received: from blade1-8.mon.demandware.net (blade1-8.mon.demandware.net [10.0.2.148])
+	by outgoing.POD260.demandware.net (Postfix) with ESMTP id B52D54BF4D
+	for <daniel.garciabarnett@gmail.com>; Wed, 30 Aug 2023 14:14:31 +0000 (GMT)
+Received: from blade1-8.mon.demandware.net (localhost [127.0.0.1])
+	by blade1-8.mon.demandware.net (Postfix) with ESMTP id 9DDF71805A
+	for <daniel.garciabarnett@gmail.com>; Wed, 30 Aug 2023 14:14:31 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; t=1710252871;
+	s=sfcc-prod-s1; d=disneystore.com;
+	h=Content-Type:MIME-Version:Subject:Message-ID:To:From:Date;
+	bh=oRelsz8RFwTfDAT7vaTqn5OeeDWr92vTTkaOqDz5UWI=;
+	b=gNMrpPP7bMVGogNK5TEE9MxvZ6UhL8P2GcAdo2Zyn3t3w2WqhyCggQPx/wnPM3jd
+	OO+HdbtBGj5aPtc71Ao0haS7d6C3oUaidFsnUpcSnKszf6YmcpQRNm9A0Tk4h/QuVqa
+	dj0NVHPZAFQkF2PWu0PeFuNOWJhXHsvpVwIO991k6I+b4P6E/x7N6gSbEp2XCl6yGY2
+	oqG7UuUpA1O2qXFkw5rvYgZ+wAoYclFoTQAwKcTaNoqpHnZwuEgO0t1/f4wOXnWeSN+
+	ThJBY6xUrTxaKp9Rik4SLIwB8rJBABAXU4Dos4Jm4Z+pBltRcMqmGcpLgnFe5P826tE
+	0ZMwlQ0Naw==
+Date: Wed, 30 Aug 2023 14:14:31 +0000 (GMT)
+From: guest.services@disneystore.com
+To: daniel.garciabarnett@gmail.com
+Message-ID: <722811604.6790.1710252871576.JavaMail.bdfj_prd@blade1-8.mon.demandware.net>
+Subject: Thank You for Your Order!
+MIME-Version: 1.0
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_6790_1259332907.1710252871576"
+
+------=_Part_6790_1259332907.1710252871576
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width" />
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8=
+" />
+    <meta name=3D"x-apple-disable-message-reformatting" />
+    <!--[if mso]>
+        <style>
+            * {
+                font-family: sans-serif !important;
+                color: #222222;
+            }
+        </style>
+    <![endif]-->
+    <!--[if !mso]><!-->
+    <style>
+        @font-face {
+            font-family: AvenirNext;
+            font-weight: 400;
+            font-style: normal;
+            src: url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/e9167238-3b3f-4813-a04a-a384394eed42-e1d3b592f63b.eot?#iefix')  format=
+('embedded-opentype'),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/1e9892c0-6927-4412-9874-1b82801ba47a-a17c827d23b2.woff') format('woff'=
+),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/46cf1067-688d-4aab-b0f7-bd942af6efd8-7c6fbea20b5d.ttf') format('truety=
+pe'),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/52a192b1-bea5-4b48-879f-107f009b666f-c8f32e0c10b8.svg#AvenirNext') for=
+mat('svg');
+        }
+        @font-face {
+            font-family: AvenirNext;
+            font-weight: 600;
+            font-style: normal;
+            src: url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/1a7c9181-cd24-4943-a9d9-d033189524e0-13be2b0b8c29.eot?#iefix')  format=
+('embedded-opentype'),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/f26faddb-86cc-4477-a253-1e1287684336-6b04d1656ab0.woff') format('woff'=
+),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/46cf1067-688d-4aab-b0f7-bd942af6efd8-7c6fbea20b5d.ttf') format('truety=
+pe'),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/a89d6ad1-a04f-4a8f-b140-e55478dbea80-5a510be9cd7b.svg#AvenirNext') for=
+mat('svg');
+        }
+        @font-face {
+            font-family: AvenirNext;
+            font-weight: 800;
+            font-style: normal;
+            src: url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/12d643f2-3899-49d5-a85b-ff430f5fad15-a26d0a973355.eot?#iefix')  format=
+('embedded-opentype'),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/91b50bbb-9aa1-4d54-9159-ec6f19d14a7c-7d6afb9bfc9a.woff') format('woff'=
+),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/a0f4c2f9-8a42-4786-ad00-fce42b57b148-220cfb221bdc.ttf') format('truety=
+pe'),
+                 url('https://static-mh.content.disney.io/catalog/assets/av=
+enir/99affa9a-a5e9-4559-bd07-20cf0071852d-29fab2150061.svg#AvenirNext') for=
+mat('svg');
+        }
+
+        * {
+            font-family:'AvenirNext',Helvetica,Arial,sans-serif;
+            color: #222222;
+        }
+
+        /* Mobile styles */
+        @media screen and (max-width: 525px) {
+            .message {
+                padding-left: 25px!important;
+                padding-right: 25px!important;
+            }
+            .product-details__table {
+                width: 100%!important;
+            }
+            .product-item__image {
+                max-width: 80px!important;
+                width: 80px!important;
+            }
+            .product-item__name {
+                margin: 0 10px 0 0!important;
+            }
+            .product-item__details {
+                width: 100%!important;
+                padding:0 15px 10px 10px!important;
+            }
+            .product-price__container {
+                width: 23%!important;
+            }
+            .product-price__container span {
+                margin: 0!important;
+            }
+            .product-item__option--desktop {
+                display: none!important;
+            }
+            .shipping-and-billing-summary table tr td {
+                border: none;
+                display: block!important;
+                border-left: none!important;
+            }
+            .shipping-and-billing-summary table tr td .payment__info {
+                width: 100%;
+            }
+            .shipping-and-billing-summary table tr td .payment__info tr td =
+{
+                display: table-cell!important;
+            }
+            .shipping-and-billing-summary table tr .col-1 {
+                border-bottom: 1px solid #e0e0e0;
+                padding: 20px!important;
+                margin-bottom: 25px!important;
+            }
+            .shipping-and-billing-summary table tr td .biling-address {
+                padding-top: 25px!important;
+            }
+            .main-wrap,
+            .order-summary-total__table,
+            .footer-banner-image {
+                width: 100%!important;
+                max-width: 100%!important;
+            }
+            .shipping-and-billing-summary table tr td {
+                width: auto!important;
+                border: none!important;
+            }
+            .shipping-and-billing-summary table tr td.payment__image {
+                width: 50px!important;
+            }
+            .order-summary-mobile-wrapper {
+                margin-bottom: 0!important;
+            }
+            .order-summary-mobile-wrapper tr .order-summary-mobile__cell {
+                padding: 25px!important;
+            }
+            .order-summary-total-wrap {
+                border:1px solid #e0e0e0;
+            }
+            .order-summary-total__label td {
+                text-align: left!important;
+            }
+            .order-summary-total__label td h2,
+            .ordered-items-label td h2 {
+                border: none!important;
+            }
+            .order-summary-total__calculations > td {
+                padding-bottom: 0!important;
+            }
+            .last_favorite {
+                display: none;
+            }
+            .price_slash {
+                border-right: none!important;
+            }
+            .pz_table {
+                width: 100%!important;
+            }
+            .pz_container {
+                width: 77%!important;
+                border-spacing: 5px 0!important;
+            }
+            .mobile__pzprice {
+                display: table-cell!important;
+                width: 22%!important;
+            }
+            .image-clock {
+                width: 50px!important;
+            }
+            .favorites-mobile {
+                display: table-cell!important;
+            }
+            .favorites-desktop {
+                display: none;
+            }
+            .cta-continue-shopping-wrap {
+                width: 335px!important;
+                margin: 0 20px!important;
+            }
+            .cta-continue-shopping-wrap td {
+                padding-top: 0!important;
+                border-top: none!important;
+            }
+
+            .cta-continue-shopping-wrap td a{
+                width: 325px!important;
+            }
+            .orderability__container {
+                width: 100%!important;
+            }
+            .mickey-cart-logo {
+                margin-bottom: 140px!important;
+            }
+            .hero-banner {
+                display: none!important;
+            }
+            .hero-banner-mobile {
+                display: table!important;
+            }
+        }
+    </style>
+    <!--<![endif]-->
+</head>
+<body bgcolor=3D"#EBF1F3" width=3D"100%" style=3D"margin:0;padding:0!import=
+ant;mso-line-height-rule:exactly;">
+
+
+
+
+   =20
+       =20
+       =20
+
+    <center width=3D"100%" style=3D"margin:0;padding:0;background-color:#EB=
+F1F3">
+        <table class=3D"main-wrap" bgcolor=3D"#ffffff" width=3D"100%" cellp=
+adding=3D"0" cellspacing=3D"0" style=3D"max-width:600px;margin:0 auto;paddi=
+ng:0;box-shadow:0 2px 4px #e0e0e0;-webkit-box-shadow:0 2px 4px #e0e0e0;-moz=
+-box-shadow:0 2px 4px #e0e0e0;-webkit-border-radius:8px;-moz-border-radius:=
+8px;border-collapse:separate;border-spacing:0;empty-cells:show;overflow:hid=
+den;">
+            <tbody>
+                <tr>
+                    <td style=3D"margin:0;padding:0;">
+
+                        <!-- header section -->
+                       =20
+                            <table class=3D"head-wrap" width=3D"100%" cellp=
+adding=3D"0" cellspacing=3D"0" style=3D"margin:0 0 -10px;padding:0;border-c=
+ollapse:collapse;overflow:hidden;">
+        <tbody>
+            <tr>
+                <td style=3D"margin:0;padding:17px 0 0;text-align:center;">
+                    <img class=3D"logo" width=3D"150" style=3D"width:100%;m=
+ax-width:150px;height:auto;margin:0;padding:0;" alt=3D"Disney Store Logo" s=
+rc=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/ds-logo-inline-=
+midnight?fmt=3Dpng">
+                </td>
+            </tr>
+   =20
+        </tbody>
+    </table>
+                       =20
+
+                        <!-- banner -->
+                        <table cellpadding=3D"0" cellspacing=3D"0" class=3D=
+"banner-wrap hero-banner" style=3D"background:url(https://cdn-ssl.s7.disney=
+store.com/is/image/ShopDisney/email-banner-desktop?fit=3Dconstrain&amp;crop=
+N=3D0,0,1,1&amp;fmt=3Dwebp&amp;qlt=3D100&amp;wid=3D2000) bottom center/100%=
+ 88% no-repeat;margin:0;padding:0;border-collapse:collapse;overflow:hidden;=
+max-width: 600px;min-height:250px;" width=3D"100%">
+    <tbody><!-- image banner below mickey cart logo -->
+        <tr>
+            <td style=3D"margin:0;padding:0;" width=3D"100%"><img alt=3D"" =
+class=3D"mickey-cart-logo" src=3D"http://cdn-ssl.s7.disneystore.com/is/imag=
+e/ShopDisney/header-1?$emailConfirmBanner$&amp;fit=3Dconstrain&amp;fmt=3Dpn=
+g-alpha&amp;crop=3D6,103,1200,99" style=3D"margin:0;padding:0;width:100%;ma=
+x-width:100%;height:auto;max-height:105px;margin-bottom:175px" /></td>
+        </tr>
+    </tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"banner-wrap hero-banner=
+-mobile" style=3D"display:none;background:url(https://cdn-ssl.s7.disneystor=
+e.com/is/image/ShopDisney/email-banner-mobile?fit=3Dconstrain&amp;cropN=3D0=
+,0,1,1&amp;fmt=3Dwebp&amp;qlt=3D100&amp;wid=3D1000) bottom center/100% 88% =
+no-repeat;margin:0;padding:0;border-collapse:collapse;overflow:hidden;max-w=
+idth: 600px;min-height:200px;" width=3D"100%">
+    <tbody><!-- image banner below mickey cart logo -->
+        <tr>
+            <td style=3D"margin:0;padding:0;" width=3D"100%"><img alt=3D"" =
+class=3D"mickey-cart-logo" src=3D"http://cdn-ssl.s7.disneystore.com/is/imag=
+e/ShopDisney/header-1?$emailConfirmBanner$&amp;fit=3Dconstrain&amp;fmt=3Dpn=
+g-alpha&amp;crop=3D6,103,1200,99" style=3D"margin:0;padding:0;width:100%;ma=
+x-width:100%;height:auto;max-height:105px;margin-bottom:175px" /></td>
+        </tr>
+    </tbody>
+</table>
+
+
+    <!-- tagline info -->
+               =20
+                <table cellpadding=3D"0" cellspacing=3D"0" class=3D"tagline=
+-info-wrap" style=3D"margin:0;padding:0;border-collapse:collapse;" width=3D=
+"100%">
+                    <tbody>
+                        <tr>
+                            <td style=3D"margin:0;padding:0 0 0px;text-alig=
+n:center;">
+                            <h1 style=3D"line-height:33px;margin:28px 0 5px=
+;padding:0;font-size:28px;color:#222222;font-family:'AvenirNext',Helvetica,=
+Arial,sans-serif;font-weight:500;">Hooray!</h1>
+               =20
+                            <h3 style=3D"margin:0;padding:0;font-size:16px;=
+color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weig=
+ht:500; line-height: 24px;">Your order has been placed!</h3>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+                        <!-- message -->
+                        <table class=3D"message-wrap" width=3D"100%" cellpa=
+dding=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;border-collapse:c=
+ollapse;overflow:hidden;">
+                            <tbody>
+                                <tr>
+    <td class=3D"message" style=3D"margin:0;padding:0px 50px 20px;text-alig=
+n:center;">
+        <h3 style=3D"margin:0;padding:0;font-size:16px;line-height:22px;col=
+or:#222222;line-height:25px;font-family:'AvenirNext',Helvetica,Arial,sans-s=
+erif;font-weight:500;">
+            Hi, Daniel! Thank you for selecting our Moment of Magic Order o=
+ption! We can't wait to deliver magic into your life. Stay up to date with =
+the status and estimated = delivery date of your order at the <a class=3D"m=
+sg-link" style=3D"color:#00=75E3;" href=3D"https://www.disneystore.com/home=
+page">Disney Store</a>.
+        </h3>
+    </td>
+</tr>
+<tr>
+    <td style=3D"text-align: center; padding: 10px 0 30px;">
+       =20
+        <div>
+            <!--[if mso]>
+            <v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=
+=3D"urn:schemas-microsoft-com:office:word" href=3D"https://www.disneystore.=
+com/on/demandware.store/Sites-shopDisney-Site/default/Order-Details?orderNu=
+mber=3D5033471943" style=3D"height:54px;v-text-anchor:middle;width:300px;" =
+arcsize=3D"8%" stroke=3D"f" fillcolor=3D"#0075E3">
+                <w:anchorlock/>
+                <center>
+            <![endif]-->
+            <a href=3D"https://www.disneystore.com/on/demandware.store/Site=
+s-shopDisney-Site/default/Order-Details?orderNumber=3D5033471943" style=3D"=
+background-color:#0075E3;border-radius:4px;color:#ffffff;display:inline-blo=
+ck;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-size:16px;font-=
+weight:bold;line-height:54px;text-align:center;text-decoration:none;width:3=
+00px;-webkit-text-size-adjust:none;"> View Order Details</a>
+            <!--[if mso]>
+                </center>
+            </v:roundrect>
+            <![endif]-->
+        </div>
+    </td>
+</tr>
+                            </tbody>
+                        </table>
+
+                        <!-- order summary, shipping and billing details --=
+>
+                        <table class=3D"order-summary-shipping-and-billing-=
+details-wrap" width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"m=
+argin:0;padding:0;border-collapse:collapse;overflow:hidden;">
+                            <tbody>
+                                <tr>
+                                    <!-- order number and time placed -->
+                                    <td style=3D"margin:0;padding:0 25px 25=
+px;text-align:center;">
+                                        <h2 style=3D"margin:0 0 8px;border-=
+top:1px solid #e0e0e0;padding:20px 0 0;font-size:20px;color:#222222;font-fa=
+mily:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:400; line-height: =
+26px;">Order #5033471943</h2>
+                                        <table class=3D"order-summary-shipp=
+ing-and-billing-details-wrap" width=3D"100%" cellpadding=3D"0" cellspacing=
+=3D"0" style=3D"margin:0;padding:0;border-collapse:collapse;overflow:hidden=
+;">
+                                            <tbody>
+                                                <tr>
+                                                    <!--[if mso]>
+                                                        <td style=3D"vertic=
+al-align:baseline;margin:0;padding:0;text-align: right;" width=3D"29%" >
+                                                            <img src=3D"htt=
+ps://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/clock?fmt=3Dpng" alt=3D=
+"clock" width=3D"18" height=3D"19">
+                                                        </td>
+                                                        <td style=3D"margin=
+:0 0 0 5px;padding:0;text-align:left;" width=3D"71%">
+                                                            <span style=3D"=
+margin:0;padding:0;font-size:14px;color:#6A7889;font-family:'AvenirNext',He=
+lvetica,Arial,sans-serif;font-weight:400;">Time Placed: 08/30/2023 at 7:14 =
+AM PT          </span>
+                                                        </td>
+                                                    <![endif]-->
+                                                    <!--[if !mso]><\!-->
+                                                        <td style=3D"margin=
+:0;padding:0;text-align:center; vertical-align:top;width: 414px">
+                                                            <img style=3D"v=
+ertical-align:baseline;margin:0 5px 0 0;" src=3D"https://cdn-ssl.s7.disneys=
+tore.com/is/image/ShopDisney/clock?fmt=3Dpng" alt=3D"clock" width=3D"18" he=
+ight=3D"19">
+                                                            <span style=3D"=
+vertical-align:top;margin:0;padding:0;font-size:14px;line-height: 20px;colo=
+r:#6A7889;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:4=
+00;">Time Placed: 08/30/2023 at 7:14 AM PT          </span>
+                                                        </td>
+                                                    <!-- <![endif]-->
+                                                </tr>
+                                            </tbody>
+
+                                            <tbody>
+                                                <tr>
+                                                    <!--[if mso]>
+                                                        <td style=3D"vertic=
+al-align:baseline;margin:0;padding:0;text-align: right;" width=3D"29%" >
+                                                            <img src=3D"htt=
+ps://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/clock?fmt=3Dpng" alt=3D=
+"clock" width=3D"18" height=3D"19">
+                                                        </td>
+                                                        <td style=3D"margin=
+:0 0 0 5px;padding:0;text-align:left;" width=3D"71%">
+                                                            <span style=3D"=
+margin:0;padding:0;font-size:14px;color:#6A7889;font-family:'AvenirNext',He=
+lvetica,Arial,sans-serif;font-weight:400;">Est. Delivery: 03/20/2024 by 2:0=
+0 PM PT          </span>
+                                                        </td>
+                                                    <![endif]-->
+                                                    <!--[if !mso]><\!-->
+                                                        <td style=3D"margin=
+:0;padding:0;text-align:center; vertical-align:top;width: 414px">
+                                                            <img style=3D"v=
+ertical-align:baseline;margin:0 5px 0 0;" src=3D"https://cdn-icons-png.flat=
+icon.com/512/240/240324.png" alt=3D"clock" width=3D"18" height=3D"19">
+                                                            <span style=3D"=
+vertical-align:top;margin:0;padding:0;font-size:14px;line-height: 20px;colo=
+r:#6A7889;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:4=
+00;">Est. Delivery: 03/21/2024 by 2:00 PM PT          </span>
+                                                        </td>
+                                                    <!-- <![endif]-->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class=3D"shipping-and-billing-summary" =
+style=3D"margin:0;padding:0;">
+                                    <td style=3D"margin:0;padding:0 20px 25=
+px;">
+                                        <table width=3D"100%" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;border-collapse:separa=
+te;overflow:hidden;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class=3D"col-1" sty=
+le=3D"margin:0;padding:20px;width:50%;vertical-align:top;border-right:10px =
+solid #fff; background-color:#f5f5f5;">
+                                                        <!-- Shipping Addre=
+ss -->
+                                                        <h4 class=3D"shippi=
+ng-address__title" style=3D"margin:0 0 10px;padding:0;font-size:16px;line-h=
+eight:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-seri=
+f;font-weight:600;">Shipping To:</h4>
+                                                       =20
+                                                           =20
+                                                            <p class=3D"shi=
+pping-address__name" style=3D"margin:0 0 3px;padding:0;font-size:14px;line-=
+height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-ser=
+if;font-weight:500;">
+                                                               =20
+                                                                    Faye Wi=
+narno
+                                                               =20
+                                                            </p>
+                                                           =20
+                                                                <p class=3D=
+"shipping-address__address1" style=3D"margin:0;padding:0;font-size:14px;lin=
+e-height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-s=
+erif;font-weight:500;">150 Brookline Ave</p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"shipping-address__address2" style=3D"margin:0;padding:0;font-size:14px;lin=
+e-height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-s=
+erif;font-weight:500;">Apt 905</p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"shipping-address__city" style=3D"margin:0;padding:0;font-size:14px;line-he=
+ight:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif=
+;font-weight:500;">
+                                                                    Boston,=
+ MA 02215
+                                                                </p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"shipping-address__country" style=3D"margin:0;padding:0;font-size:14px;line=
+-height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-se=
+rif;font-weight:500;">United States</p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"shipping-address__phone" style=3D"margin:0;padding:0;font-size:14px;line-h=
+eight:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-seri=
+f;font-weight:500;">(205) 405-4474</p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"shipping-address__email" style=3D"margin:0;padding:0;font-size:14px;line-h=
+eight:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-seri=
+f;font-weight:500;">daniel.garciabarnett@gmail.com</p>
+                                                           =20
+
+                                                            <!-- Shipping M=
+ethod -->
+                                                            <h4 class=3D"sh=
+ipping-method__title" style=3D"border-top: 1px solid #C2C6CB;padding:20px 0=
+ 10px;margin:20px 0 0;font-size:16px;line-height:20px;color:#222222;font-fa=
+mily:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:600;">U.S. Standar=
+d</h4>
+
+                                                           =20
+                                                                <p class=3D=
+"shipping-method__arrivaltime" style=3D"margin:0;padding:0;font-size:14px;l=
+ine-height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans=
+-serif;font-weight:500;">Currently 5-7 business days, unless otherwise note=
+d. </p>
+                                                           =20
+
+                                                       =20
+                                                    </td>
+                                                    <td class=3D"col-2" sty=
+le=3D"margin:0;padding:20px;width:50%;vertical-align:top; background: #f5f5=
+f5; border-left: 10px solid #fff;">
+                                                        <!-- Billing Addres=
+s -->
+
+                                                       =20
+                                                            <h4 class=3D"bi=
+lling-address" style=3D"margin:0 0 10px;padding:0;font-size:16px;line-heigh=
+t:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;fo=
+nt-weight:600;">Billing Address:</h4>
+
+                                                           =20
+                                                               =20
+                                                           =20
+
+                                                            <p class=3D"bil=
+ling-address__name" style=3D"margin:0 0 3px;padding:0;font-size:14px;line-h=
+eight:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-seri=
+f;font-weight:500;">
+                                                                Daniel Garc=
+ia-Barnett
+                                                            </p>
+
+                                                           =20
+                                                                <p class=3D=
+"billing-address__address1" style=3D"margin:0;padding:0;font-size:14px;line=
+-height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-se=
+rif;font-weight:500;">118 Main St</p>
+                                                           =20
+
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"billing-address__city" style=3D"margin:0;padding:0;font-size:14px;line-hei=
+ght:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;=
+font-weight:500;">
+                                                                    Nyack, =
+NY 10960
+                                                                </p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"billing-address__country" style=3D"margin:0;padding:0;font-size:14px;line-=
+height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-ser=
+if;font-weight:500;">United States</p>
+                                                           =20
+
+                                                           =20
+                                                                <p class=3D=
+"billing-address__phone" style=3D"margin:0 0 20px;padding:0;font-size:14px;=
+line-height:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,san=
+s-serif;font-weight:500;">(205) 405-4474</p>
+                                                           =20
+                                                       =20
+
+                                                        <!-- Payment Method=
+ -->
+                                                        <table style=3D"mar=
+gin:0;" class=3D"payment__info">
+                                                            <tr>
+                                                                <td colspan=
+=3D"2">
+                                                                   =20
+                                                                        <h4=
+ style=3D"margin:20px 0px 10px 0px;font-weight:600;font-size:16px;line-heig=
+ht:22px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;"=
+>Payment Info</h4>
+                                                                   =20
+                                                                </td>
+                                                            </tr>
+                                                           =20
+                                                           =20
+                                                               =20
+                                                                <tr>
+                                                                   =20
+                                                                        <td=
+ valign=3D"top" style=3D"width: 50px;" class=3D"payment__image">
+                                                                           =
+=20
+                                                                           =
+     <img src=3D"https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/vis=
+a-logo-2x?fmt=3Dpng" width=3D"30" style=3D"width:30px;height:auto;margin-ri=
+ght:15px;">
+                                                                           =
+=20
+                                                                        </t=
+d>
+                                                                   =20
+                                                                    <td >
+                                                                       =20
+                                                                           =
+ <h4 class=3D"payment-method" style=3D"margin:0;padding:0;font-size:14px;li=
+ne-height:22px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-=
+serif;font-weight:600;">
+                                                                           =
+    =20
+                                                                           =
+         Visa
+                                                                           =
+    =20
+                                                                           =
+ </h4>
+                                                                           =
+ <p class=3D"payment-method__cctype-details" style=3D"margin:0;padding:0;fo=
+nt-size:14px;line-height:22px;color:#222222;font-family:'AvenirNext',Helvet=
+ica,Arial,sans-serif;font-weight:400;">
+                                                                           =
+    =20
+                                                                           =
+         ****7133
+                                                                           =
+    =20
+                                                                           =
+ </p>
+                                                                       =20
+                                                                    </td>
+                                                                </tr>
+                                                           =20
+                                                           =20
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- ordered items list -->
+                        <!-- Email recieved list of order -->
+                        <table class=3D"ordered-items-list-wrap" width=3D"1=
+00%" cellpadding=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;border=
+-collapse:collapse;overflow:hidden;">
+                            <tbody>
+                                <tr class=3D"ordered-items-label" style=3D"=
+margin:0;padding:0;">
+                                    <td style=3D"margin:0;padding:0 25px 10=
+px;text-align:left;">
+                                        <h2 style=3D"margin:0;line-height:2=
+6px;font-size:20px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,s=
+ans-serif;font-weight:400;">Your Items</h2>
+                                    </td>
+                                </tr>
+                                <tr class=3D"ordered-items-list" style=3D"m=
+argin:0;padding:0;">
+                                    <td style=3D"margin:0;padding:0 20px 0;=
+">
+                                        <table width=3D"100%" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;border-collapse:collap=
+se;overflow:hidden;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style=3D"margin:0;p=
+adding:0;vertical-align:top;">
+
+                                                        <table width=3D"100=
+%" cellpadding=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;border-c=
+ollapse:collapse;overflow:hidden;">
+                                                            <tbody>
+                                                                <!-- produc=
+t item -->
+                                                               =20
+                                                                   =20
+                                                                       =20
+                                                                           =
+=20
+                                                                       =20
+                                                                       =20
+    <tr class=3D"product-item" style=3D"margin:0; border-top: 1px solid #e0=
+e0e0;">
+        <!-- product image column -->
+        <td class=3D"product-details__column" style=3D"margin:0;padding:30p=
+x 0 0;vertical-align:top;width: 120px;border-top:1px solid #e0e0e0;">
+           =20
+
+
+
+
+
+    <img class=3D"product-item__image" height=3D"120" width=3D"120" style=
+=3D"margin:0;padding:0;width:100%;max-width:120px;display:block;height:auto=
+;"=20
+        src=3D"https://cdn-ssl.s7.disneystore.com/is/image/DisneyShopping/1=
+231000444635"
+        alt=3D"Lotso Scented Plush &ndash; Toy Story 3 &ndash; Medium 13''"
+        title=3D"Lotso Scented Plush &ndash; Toy Story 3 &ndash; Medium 13'=
+'"/>
+
+
+
+        </td>
+        <!-- product details column -->
+        <td class=3D"product-details__table" colspan=3D"2" style=3D"border-=
+top:1px solid #e0e0e0;padding: 30px 0 0; vertical-align: top;" >
+            <table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=
+=3D"margin:0;padding:0;border-collapse:collapse;overflow:hidden;">
+                <tbody>
+                    <!-- product details column upper table no pz -->
+                    <tr>
+                                                                           =
+                                                 <!-- product details colum=
+n -->
+                        <td width=3D"250" class=3D"product-item__details" s=
+tyle=3D"margin:0;padding:0 0 20px 15px;vertical-align:top; width: 250px;">
+                            <table width=3D"99%" cellpadding=3D"0" cellspac=
+ing=3D"0" style=3D"margin:0;padding:0;border-collapse:collapse;overflow:hid=
+den;">
+                                <tbody>
+                                    <tr>
+                                        <td style=3D"margin:0;padding:0;ver=
+tical-align:top;">
+                                            <h4 class=3D"product-item__name=
+" style=3D"line-height: 22px;margin:0 0 5px;padding:0;font-size:16px;color:=
+#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:500=
+;">Lotso Scented Plush &ndash; Toy Story 3 &ndash; Medium 13''</h4>
+                                        </td>
+                                    </tr>
+
+                                    <!-- product item number-->
+                                    <tr>
+                                        <td style=3D"margin:0;padding:0;ver=
+tical-align:top;" >
+                                            <p class=3D"product-item__numbe=
+r" style=3D"margin:0 0 5px;padding:0;font-size:12px;color:#6A7889;font-fami=
+ly:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:500;">ID: 4123133981=
+78</p>
+                                        </td>=20
+                                    </tr>
+                                   =20
+                                    <!-- attributes/size/variants -->
+                                   =20
+                                    <!-- quantity @ price -->
+                                    <tr>
+                                        <td style=3D"margin:0;padding:0;ver=
+tical-align:top; color: #222222;font-family:'AvenirNext',Helvetica,Arial,sa=
+ns-serif;">
+                                            <p class=3D"product-item__quant=
+ity" style=3D"color:#6A7889;font-size:12px;line-height:16px;margin:0;">
+                                                <span style=3D"color:#6A788=
+9;">Quantity: </span>
+                                                <span style=3D"color:#6A788=
+9;" class=3D"qty_24780046523ccc7e08eb68c538">1 </span>
+                                                <span style=3D"color:#6A788=
+9;">at </span>
+
+                                                <span class=3D"" style=3D"m=
+argin:0 5px 0;padding:0;color:#6A7889;text-decoration:line-through;font-wei=
+ght:500; ">
+                                                    $26.99
+                                                </span>
+                                                <span class=3D"pricing line=
+-item-total-price-amount" style=3D"color: #6A7889;margin:0 5px 0;padding:0;=
+font-weight:500;">$20.00</span>
+                                            </p>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Customized Product options -->
+                                   =20
+
+                                   =20
+                                    <!-- promotion -->
+                                   =20
+                                </tbody>
+                            </table>
+                        </td>
+                        <!-- price column -->
+                        <td style=3D"vertical-align:top;padding-top: 0;" wi=
+dth=3D"170">
+                            <table width=3D"100%" cellpadding=3D"0" cellspa=
+cing=3D"0" style=3D"margin:0;padding:0;border-collapse:collapse;overflow:hi=
+dden;">
+                                <tbody>
+                                    <tr>
+                                        <td class=3D"product-price__contain=
+er" style=3D"margin:0;padding:0;vertical-align:top;width:41%;text-align:rig=
+ht;">
+                                            <h4 class=3D"product-item__pric=
+e" style=3D"margin:0 0 10px;padding:0;font-size:14px;color:#222222;font-fam=
+ily:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:600;">
+                                                <span class=3D" price_slash=
+" style=3D"margin:0;padding:0;color:#6A7889;text-decoration:line-through;fo=
+nt-weight:500;border-right:10px solid #fff;">$26.99</span>
+                                                $20.00
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                   =20
+
+    =20
+        <tr style=3D"text-align: right;">
+           =20
+               =20
+            =20
+        </tr>
+   =20
+
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- product details column lower pz table -->
+                   =20
+                        <!-- Personalization -->
+                        <tr>
+    <td style=3D"margin:0;padding:0px 0 10px 5px; width: 100%;" width=3D"10=
+0" colspan=3D"2">
+        <table class=3D"pz_table" width=3D"70%" cellpadding=3D"0" cellspaci=
+ng=3D"10" style=3D"margin:0;padding:0;border-collapse:separate;border-spaci=
+ng: 10px 0;overflow:hidden;">
+            <tbody>
+               =20
+                   =20
+
+                    =20
+               =20
+            </tbody>
+        </table>
+    </td>
+</tr>
+                     <!-- end of pz table -->
+                    <!-- shipping messages -->
+                   =20
+                   =20
+                   =20
+                   =20
+                       =20
+                   =20
+                   =20
+                   =20
+
+                </tbody>
+            </table>
+        </td> <!-- end of product details column -->=20
+    </tr> <!-- end of product__item -->
+
+                                                                   =20
+                                                               =20
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Email recieved list of order Closed-->
+
+                        <!-- order summary total -->
+                        <table class=3D"order-summary-mobile-wrapper" width=
+=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;b=
+order-collapse:collapse;overflow:hidden;">
+                            <tbody>
+                                <tr>
+                                    <td class=3D"order-summary-mobile__cell=
+" style=3D"margin:0;padding:0">
+                                        <table class=3D"order-summary-total=
+-wrap" width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"margin:0=
+;padding:0;border-collapse:collapse;overflow:hidden;">
+                                            <tbody>
+                                                <tr class=3D"order-summary-=
+total__label" style=3D"margin:0;padding:0;">
+                                                    <td style=3D"margin:0;p=
+adding:0 25px;text-align:right;">
+                                                        <h2 style=3D"margin=
+:0 0 20px;padding:30px 0 0;border-top:1px solid #e0e0e0;font-size:20px;colo=
+r:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:6=
+00;">Order Summary</h2>
+                                                    </td>
+                                                </tr>
+                                                <tr class=3D"order-summary-=
+total__calculations order-summary" style=3D"margin:0;padding:0;">
+                                                    <td style=3D"margin:0;p=
+adding:0 25px 0;text-align:right;">
+
+                                                        <table class=3D"ord=
+er-summary-total__table" width=3D"300" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"margin:0;padding:0;width:100%;max-width:300px;float:right;border-c=
+ollapse:collapse;overflow:hidden;border:none;">
+                                                            <tbody>
+                                                                <tr style=
+=3D"margin:0;padding:0;">
+                                                                    <td sty=
+le=3D"margin:0;padding:28px 0 0;border-top:1px solid #e0e0e0;">
+                                                                        <p =
+class=3D"order-summary__label" style=3D"margin:0 0 14px;padding:0;text-alig=
+n:left;font-size:14px;color:#222222;font-family:'AvenirNext',Helvetica,Aria=
+l,sans-serif;font-weight:500;">Subtotal</p>
+                                                                    </td>
+                                                                    <td sty=
+le=3D"margin:0;padding:28px 0 0;text-align:right;border-top:1px solid #e0e0=
+e0;">
+                                                                        <p =
+class=3D"order-summary__value" style=3D"margin:0 0 14px;padding:0;font-size=
+:14px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;fon=
+t-weight:500;">$20.00</p>
+                                                                       =20
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td sty=
+le=3D"margin:0;padding:0;">
+                                                                        <p =
+class=3D"order-summary__label" style=3D"margin:0 0 14px;padding:0;text-alig=
+n:left;font-size:14px;color:#222222;font-family:'AvenirNext',Helvetica,Aria=
+l,sans-serif;font-weight:500;">Shipping &amp; Handling</p>
+                                                                    </td>
+                                                                    <td sty=
+le=3D"margin:0;padding:0;text-align:right;">
+                                                                        <p =
+class=3D"order-summary__value" style=3D"margin:0 0 14px;padding:0;font-size=
+:14px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-serif;fon=
+t-weight:500;">FREE</p>
+                                                                    </td>
+                                                                </tr>
+                                                               =20
+                                                                <tr>
+                                                                    <td sty=
+le=3D"margin:0;padding:0;">
+                                                                        <p =
+class=3D"order-summary__label" style=3D"margin:0 0 28px;padding:0;text-alig=
+n:left;font-size:14px;color:#222222;font-family:'AvenirNext',Helvetica,Aria=
+l,sans-serif;font-weight:500;">Est. Sales Tax</p>
+                                                                    </td>
+                                                                    <td sty=
+le=3D"margin:0;padding:0;text-align:right;">
+                                                                        <p =
+style=3D"margin:0 0 28px;padding:0;font-size:14px;color:#222222;font-family=
+:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:500;">$1.25</p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style=
+=3D"margin:0;padding:0;">
+                                                                    <td sty=
+le=3D"margin:0;padding:0;border-top:1px solid #e0e0e0;border-bottom:none;">
+                                                                        <h2=
+ style=3D"margin:25px 0;padding:0;border:none;outline:none;line-height:1.2;=
+text-align:left;font-size:18px;color:#222222;font-family:'AvenirNext',Helve=
+tica,Arial,sans-serif;font-weight:600;">Total</h2>
+                                                                    </td>
+                                                                    <td sty=
+le=3D"margin:0;padding:0;text-align:right;border-top:1px solid #e0e0e0;bord=
+er-bottom:none;">
+                                                                        <h2=
+ style=3D"margin:25px 0;padding:0;border:none;outline:none;line-height:1.2;=
+font-size:18px;color:#222222;font-family:'AvenirNext',Helvetica,Arial,sans-=
+serif;font-weight:600;">$21.25</h2>
+                                                                    </td>
+                                                                </tr>
+
+                                                               =20
+                                                                   =20
+                                                                    <tr sty=
+le=3D"margin:0;padding:0;">
+                                                                        <td=
+ style=3D"margin:0;padding:0;" colspan=3D"2">
+                                                                           =
+ <table class=3D"order-summary-todays-savings" width=3D"100%" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;border-collapse:collap=
+se;overflow:hidden;">
+                                                                           =
+     <tbody>
+                                                                           =
+         <tr>
+                                                                           =
+             <td style=3D"width:65px;margin:0;padding:15px 0 25px;border-bo=
+ttom:none;text-align:left;">
+                                                                           =
+                 <img class=3D"icon-godmother" width=3D"65" height=3D"45"st=
+yle=3D"width:65px;max-width:65px;float:left;height:45px;margin:0;padding:0;=
+" src=3D"https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/godmother?f=
+mt=3Dpng-alpha" alt=3D"God Mother"  />
+                                                                           =
+             </td>
+                                                                           =
+             <td style=3D"margin:0;padding:15px 0 25px;border-bottom:none;"=
+>
+                                                                           =
+                 <h2 style=3D"margin:0;padding:0;border:none;outline:none;l=
+ine-height:1.2;text-align:left;font-size:14px;color:#008900;font-family:'Av=
+enirNext',Helvetica,Arial,sans-serif;font-weight:600;">Today's Savings:</h2=
+>
+                                                                           =
+             </td>
+                                                                           =
+             <td style=3D"margin:0;padding:15px 0 25px;border-bottom:none;"=
+>
+                                                                           =
+                 <h2 style=3D"margin:0;padding:0;border:none;outline:none;l=
+ine-height:1.2;text-align:right;font-size:14px;color:#008900;font-family:'A=
+venirNext',Helvetica,Arial,sans-serif;font-weight:600;">$15.94</h2>
+                                                                           =
+             </td>
+                                                                           =
+         </tr>
+                                                                           =
+     </tbody>
+                                                                           =
+ </table>
+                                                                        </t=
+d>
+                                                                    </tr>
+                                                               =20
+                                                            </tbody>
+                                                        </table>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                       =20
+                            <!-- call to action continue shopping -->
+                            <table class=3D"cta-continue-shopping-wrap"  ce=
+llpadding=3D"0" cellspacing=3D"0" style=3D"width: 550px; margin:5px 25px;pa=
+dding:0;border-collapse:collapse;overflow:hidden;">
+                                <tbody>
+                                    <tr>
+                                        <td style=3D"margin:0;padding:35px =
+0 30px;border-top:1px solid #e0e0e0;text-align:center;">
+                                            <!--[if mso]>
+                                            <v:roundrect xmlns:v=3D"urn:sch=
+emas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" h=
+ref=3D"https://www.disneystore.com/" style=3D"height:54px;v-text-anchor:mid=
+dle;width:300px;" arcsize=3D"6%" strokecolor=3D"#0075E3" fillcolor=3D"#0075=
+E3">
+                                                <w:anchorlock/>
+                                                <center style=3D"color:#fff=
+fff;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:600;fon=
+t-size:16px;">
+                                                    Continue Shopping
+                                                </center>
+                                            </v:roundrect>
+                                            <![endif]-->
+                                            <a href=3D"https://www.disneyst=
+ore.com/" target=3D"_blank" style=3D"margin-left:auto;margin-right:auto;bac=
+kground-color:#0075E3;border:1px solid #0075E3;border-radius:3px;color:#fff=
+fff;display:inline-block;font-family:'AvenirNext',Helvetica,Arial,sans-seri=
+f;font-weight:700;font-size:16px;line-height:54px;text-align:center;text-de=
+coration:none;width:300px;-webkit-text-size-adjust:none;mso-hide:all;">
+                                                Continue Shopping
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Favorites -->
+                           =20
+                                <table style=3D"width:100%;border-spacing:u=
+nset; padding-bottom: 40px">
+                                    <tbody>
+                                        <tr>
+                                            <td style=3D"padding:0;" colspa=
+n=3D"3">
+                                                <h2 style=3D"text-align:cen=
+ter;margin:0 0 15px 0;padding:0;line-height:26px;font-size:24px;color:#2222=
+22;font-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:400;">Sh=
+op Our Favorites</h2>
+                                            </td>
+                                        </tr>
+                                        <tr>
+   =20
+        <td style=3D"text-align:center;max-width:180px;">
+            <table style=3D"width:100%;">
+                <tbody>
+                    <tr>
+                        <td align=3D"center" class=3D"favorites-desktop">
+                            <a href=3D"https://www.disneystore.com/accessor=
+ies/?CMP=3DEMC-email_trans_orderconfirm_SF1" style=3D"text-decoration:none;=
+">
+                                <img width=3D"160" style=3D"height:auto;wid=
+th:160px;" src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500=
+x500_moana-ears_20230502"/>
+                                <p style=3D"font-weight:600;margin:0;paddin=
+g:0px;font-size:12px;line-height:17.13px;color:#222222"></p>
+                            </a>
+                        </td>
+                        <td align=3D"center" class=3D"favorites-mobile" sty=
+le=3D"display:none;">
+                            <a href=3D"https://www.disneystore.com/accessor=
+ies/?CMP=3DEMC-email_trans_orderconfirm_SF1" style=3D"text-decoration:none;=
+">
+                                <img width=3D"160" style=3D"height:auto;" s=
+rc=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500x500_moana-e=
+ars_20230502"/>
+                                <p style=3D"font-weight:600;margin:0;paddin=
+g:0px;font-size:12px;line-height:17.13px;color:#222222"></p>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+   =20
+
+   =20
+        <td style=3D"text-align:center;max-width:180px;">
+            <table style=3D"width:100%;">
+                <tbody>
+                    <tr>
+                        <td align=3D"center" class=3D"favorites-desktop">
+                            <a href=3D"https://www.disneystore.com/toys-col=
+lectibles/toys/?CMP=3DEMC-email_trans_orderconfirm_SF2" style=3D"text-decor=
+ation:none;">
+                                <img width=3D"160" style=3D"height:auto;wid=
+th:160px" src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500x=
+500_goofy-plush_20230502"/>
+                                <p style=3D"font-weight:600;margin:0;paddin=
+g:0px;font-size:12px;line-height:17.13px;color:#222222;"></p>
+                            </a>
+                        </td>
+                        <td align=3D"center" class=3D"favorites-mobile" sty=
+le=3D"display:none;">
+                            <a href=3D"https://www.disneystore.com/toys-col=
+lectibles/toys/?CMP=3DEMC-email_trans_orderconfirm_SF2" style=3D"text-decor=
+ation:none;">
+                                <img width=3D"160" style=3D"height:auto;" s=
+rc=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500x500_goofy-p=
+lush_20230502"/>
+                                <p style=3D"font-weight:600;margin:0;paddin=
+g:0px;font-size:12px;line-height:17.13px;color:#222222;"></p>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+   =20
+   =20
+        <td class=3D"last_favorite" style=3D"text-align:center;max-width:18=
+0px;">
+            <table style=3D"width:100%;">
+                <tbody>
+                    <tr>
+                        <td align=3D"center" class=3D"favorites-desktop">
+                            <a href=3D"https://www.disneystore.com/clothing=
+/?CMP=3DEMC-email_trans_orderconfirm_SF3" style=3D"text-decoration:none;">
+                                <img width=3D"160" style=3D"height:auto;wid=
+th:160px;" src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500=
+x500_toystory-spiritjersey_20230502"/>
+                                <p style=3D"font-weight:600;margin:0;paddin=
+g:0px;font-size:12px;line-height:17.13px;color:#222222;"></p>
+                            </a>
+                        </td>
+                        <td align=3D"center" class=3D"favorites-mobile" sty=
+le=3D"display:none;">
+                            <a href=3D"https://www.disneystore.com/clothing=
+/?CMP=3DEMC-email_trans_orderconfirm_SF3" style=3D"text-decoration:none;">
+                                <img width=3D"160" style=3D"height:auto;" s=
+rc=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500x500_toystor=
+y-spiritjersey_20230502"/>
+                                <p style=3D"font-weight:600;margin:0;paddin=
+g:0px;font-size:12px;line-height:17.13px;color:#222222;"></p>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+   =20
+</tr>
+                                    </tbody>
+                                </table>
+                           =20
+
+                            <!-- footer banner -->
+                           =20
+                                <table class=3D"footer-banner-wrap" width=
+=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"margin:0;padding:0;b=
+order-collapse:collapse;overflow:hidden;">
+                                    <tbody>
+                                        <tr>
+                                            <td class=3D"favorites-desktop"=
+ style=3D"margin:0;padding:0;" width=3D"100%">
+                                               =20
+                                                    <a href=3D"https://www.=
+disneystore.com/new-content/?CMP=3DEMC-email_trans_orderconfirm_promo">
+                                                        <img class=3D"foote=
+r-banner-image" width=3D"600" src=3D"https://cdn-ssl.s7.disneystore.com/is/=
+image/ShopDisney/6487_eml_transactional-banner-refresh_20231227?$emailPromo=
+Desktop$" style=3D"margin:0 auto;padding:0;display:block;width:100%;max-wid=
+th:600px;height:auto;" />
+                                                    </a>
+                                               =20
+                                            </td>
+
+                                            <td class=3D"favorites-mobile" =
+style=3D"display:none;margin:0;padding:0;" width=3D"100%">
+                                               =20
+                                                    <a href=3D"https://www.=
+disneystore.com/new-content/?CMP=3DEMC-email_trans_orderconfirm_promo">
+                                                        <img class=3D"foote=
+r-banner-image" width=3D"375" src=3D"https://cdn-ssl.s7.disneystore.com/is/=
+image/ShopDisney/6487_eml_transactional-banner-refresh_20231227_m?$emailPro=
+moMobile$" style=3D"margin:0 auto;padding:0;display:block;width:100%;max-wi=
+dth:375px;height:auto;" />
+                                                    </a>
+                                               =20
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                           =20
+                       =20
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- terms and conditions in footer-->
+        <table class=3D"main-footer-wrap" width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" style=3D"max-width:600px;margin:0 auto;padding:0;border-c=
+ollapse:separate;border-spacing:0;empty-cells:show;overflow:hidden;">
+            <tbody>
+               =20
+                    <tr>
+   <td style=3D"margin:0;padding:43.5px 50px 15px;">
+      <p style=3D"margin:0;font-size:10px;line-height:15px;color:#6A7889;fo=
+nt-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:500;">Please =
+do not reply to this email as this address is not monitored. If you have an=
+y questions, please visit <a target=3D"_blank" style=3D"color:#6A7889;text-=
+decoration:underline;" href=3D"https://support.disneystore.com/hc/en-us">su=
+pport.disneystore.com</a></p>
+    </td>
+</tr>
+<tr>
+   <td style=3D"margin:0;padding:0 50px 15px;">
+     <p style=3D"margin:0;font-size:10px;line-height:15px;color:#6A7889;fon=
+t-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:500;">Disney S=
+tore, 4795 Imagination Drive, Memphis, TN 38118 (800) 328-0368</p>
+   </td>
+</tr>
+<tr>
+   <td style=3D"margin:0;padding:0 50px 15px;">
+    <p style=3D"margin:0;font-size:10px;line-height:15px;color:#6A7889;font=
+-family:'AvenirNext',Helvetica,Arial,sans-serif;font-weight:500;">All marks=
+ are the property of their respective owners. =C2=A9Disney. All Rights Rese=
+rved. <a target=3D"_blank" style=3D"color:#6A7889;text-decoration:underline=
+;" href=3D"https://support.disney.com/hc/en-us/articles/360000829466-Legal-=
+Notices">Additional Content Information</a></p>
+   </td>
+</tr>
+               =20
+            </tbody>
+        </table>
+
+    </center>
+</body>
+</html>
+------=_Part_6790_1259332907.1710252871576--

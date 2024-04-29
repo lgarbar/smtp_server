@@ -1,0 +1,847 @@
+Delivered-To: daniel.garciabarnett@gmail.com
+Received: by 2002:a05:7022:3a09:b0:7a:60f9:5492 with SMTP id sv9csp1386727dlb;
+        Wed, 30 Aug 2023 07:14:33 -0700 (PDT)
+X-Received: by 2002:ac8:5dca:0:b0:43a:e8ae:c2c3 with SMTP id e10-20020ac85dca000000b0043ae8aec2c3mr29202qtx.31.1714299005548;
+        Wed, 30 Aug 2023 07:14:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1714299005; cv=none;
+        d=google.com; s=arc-20160816;
+        b=sQBNegArRgvuiupJgCWYtw6QtR+11dhWAzeWOeIv4eFteeY0ZQzwLyhOXhnViFNs2L
+         /oyNkPE0B8FA3wZzIZKddW67AxatrctvK00xtByNSJk10YwWuCnRWeIiPbcTQ7fGE3ZB
+         ffA7iHvJZRRkCPp9+RU91D7ziwTGPE7Skb6KTMBvYA7vfAtY3EXw7a1PRssTRBQsTkyh
+         kSLlT64z8ikOZkxokBn245iYsHRDwalNE9WJgYJH39uYom7RzYnyjj29X+CVtmLriaQS
+         Okv36HtArAqvF3AR7DDhzIWOkJJI4vqy+gIMUH+5IDoi4mf8IwyVEqgfSFDB4Zow+7C+
+         egew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:date:message-id:subject:mime-version:from:dkim-signature;
+        bh=dunU7Pn4J6kiO0uujDEvePG4RcDsjVQUihZs4v91bQ8=;
+        fh=2wxgMVg2j/HCuO2CdKKkOcqqC4avd0qTyBQpSXU2tlw=;
+        b=lqFO6atwvQDiAbbv3fc00mMz8ob1fz68z0DZSeiYf0Z2naA91YbxR3NjulAWh+y+sl
+         RUnZPKKxcGKhUbTxpaQylHu/ixP6YQXMQ9+2JSIrpA/qw4EzhYrXX2sprhwTQHhXg2Xa
+         7MKgLHZi+8Ws6U6YLYzYlHb6eQPQNMoc3mqLKJa/InF7NcdZ8t1TaW/oa8zkSJI2wvl0
+         BICBU6HaJY7MDMOP0ccKwOoBWEmXjePDxVYerSOWF9j46IUjZjYIHR3XIE8dHksqc+in
+         UAD/JEf5Z/p1N9/GkLgZMTShXsgnHP/CgwF0DAbRaTUNRFDjYWM4O5zPUHmbbUdt/LaE
+         8/Ww==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b="T2IG/ACH";
+       spf=pass (google.com: domain of guest.services@disneystore.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=guest.services@disneystore.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+Return-Path: <guest.services@disneystore.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id e3-20020ac80643000000b00434ae42e180sor7033234qth.0.2024.04.28.03.10.05
+        for <daniel.garciabarnett@gmail.com>
+        (Google Transport Security);
+        Wed, 30 Aug 2023 07:14:33 -0700 (PDT)
+Received-SPF: pass (google.com: domain of guest.services@disneystore.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b="T2IG/ACH";
+       spf=pass (google.com: domain of guest.services@disneystore.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=guest.services@disneystore.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1714299004; x=1714903804; dara=google.com;
+        h=to:date:message-id:subject:mime-version:from:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=dunU7Pn4J6kiO0uujDEvePG4RcDsjVQUihZs4v91bQ8=;
+        b=T2IG/ACHB5Izus5TbOgITaIdqz9vDnO9oBknLSaqSssvkvA0j4I3pmDJqZIKPET5oi
+         qUDJsta8SYKAbodJSuCBrD1OBddNUtU7Lj5O4pJy9WUcJ7yM4WQen5dqhD848KlwIyb6
+         ByYEQ4i4maPtmufUx+zp7QCpHYLRp1pURdtadKw7VueAcrxQOkZCGyyOPoqkIorsMII6
+         62rRv+7KfYqfMnTJg/qra3HFjfQd5e7PuNvhx8cn9Yfl436Cb/xWPDiFO5xkx1gGlf70
+         3xO6kG5LjtjMKVWjbMfK2Cqk0e5j7Dp0qksdyCZCYicZcKi/+E+StD0/91JXlk9+xVY3
+         l37A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714299004; x=1714903804;
+        h=to:date:message-id:subject:mime-version:from:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=dunU7Pn4J6kiO0uujDEvePG4RcDsjVQUihZs4v91bQ8=;
+        b=TCyWK0QksvdgL3l1Urnxdm1cyKCRNwt5S2MXsjI4DUfaB9/vL0XzZqaIUEFEUte6rJ
+         PAWSn389KYABxlQNVmHiZ1IeRwDFlL/ruv+N5+JjXgygYpxRbfDbUJd5xDOpuPQlEUHG
+         7NSjGiuokjr4DO9dQ3p2RANgQpkjBnW2BO3Gi/bdPT5b9pWwZTA1u0UdgT0yXbv/P/iY
+         NhHWKqtSXOSR6n5WxYd4rhktqy0g1ZkcmQO1FFGbki41Qs5TkL4+CDQaGlUKvhkwZ+BN
+         vBNnkseV6sA8fCYO6F0hez9eHs8tSeyW6boACicbNwf3akBi5avQ2Q0wniK+d/lfqx46
+         cSfQ==
+X-Gm-Message-State: AOJu0Yw9OoduoBVOiry2U0JeA2FRW1m3Ztu2zwu62hRqpMvQFDlrCQe+
+	x651LtIOHe7+muU63knO+FCZgBORSZLI/R+1Y3nEbWg9zoSeqIMpoSI1Qw==
+X-Google-Smtp-Source: AGHT+IG8AX0yyhd0q7CsglmBMMfjOvxE1CeXZtfFZ07ljMWf5ZLorwmiEyAyHfSfNfpn3lTVGC/mEg==
+X-Received: by 2002:a05:6214:519e:b0:6a0:b905:9302 with SMTP id kl30-20020a056214519e00b006a0b9059302mr4258529qvb.3.1714299004179;
+        Wed, 30 Aug 2023 03:10:04 -0700 (PDT)
+Return-Path: <guest.services@disneystore.com>
+Received: from smtpclient.apple (ool-4575efb9.dyn.optonline.net. [69.117.239.185])
+        by smtp.gmail.com with ESMTPSA id z12-20020a0cf00c000000b006a0441c4d15sm9521697qvk.38.2024.04.28.03.10.03
+        for <daniel.garciabarnett@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 30 Aug 2023 03:10:03 -0700 (PDT)
+From: Disney Store <guest.services@disneystore.com>
+X-Google-Original-From: Disney Store <guest.services@disneystore.com>
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_324570BC-257E-4703-94D4-AEAE2F62CE04"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.500.171.1.1\))
+Subject: Thank You for Your Order!
+Message-Id: <F81683C6-57B3-4652-ACEF-78E61296F615@gmail.com>
+Date: Wed, 30 Aug 2023 06:09:52 -0400
+To: Luis Daniel Garcia-Barnett <daniel.garciabarnett@gmail.com>
+X-Mailer: Apple Mail (2.3774.500.171.1.1)
+
+
+--Apple-Mail=_324570BC-257E-4703-94D4-AEAE2F62CE04
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+
+
+Hooray!
+Your order has been placed!
+Hi, Daniel! Thank you for selecting our Moment of Magic Order option! We =
+can't wait to deliver magic into your life. Stay up to date with the =
+status and estimated delivery date of your order at the Disney Store =
+<https://www.disneystore.com/homepage>.
+View Order Details =
+<https://www.disneystore.com/on/demandware.store/Sites-shopDisney-Site/def=
+ault/Order-Details?orderNumber=3D5033471943>
+Order #5033471943
+ Time Placed: 08/30/2023 at 7:14 AM PT=20
+ Est. Delivery: 03/21/2024 by 2:00 PM PT=20
+Shipping To:
+
+Faye Winarno
+150 Brookline Ave
+Apt 905
+Boston, MA 02215
+United States
+(205) 405-4474
+daniel.garciabarnett@gmail.com <mailto:daniel.garciabarnett@gmail.com>
+U.S. Standard
+Currently 5-7 business days, unless otherwise noted.=20
+Billing Address:
+
+Daniel Garcia-Barnett
+118 Main St
+Nyack, NY 10960
+United States
+(205) 405-4474
+
+Payment Info
+
+=09
+Visa
+****7133
+Your Items
+=09
+Lotso Scented Plush =E2=80=93 Toy Story 3 =E2=80=93 Medium 13''
+ID: 412313398178
+Quantity: 1 at $26.99 $20.00
+$26.99$20.00
+
+Order Summary
+
+Subtotal
+
+$20.00
+
+Shipping & Handling
+
+FREE
+
+Est. Sales Tax
+
+$1.25
+
+Total
+
+$21.25
+
+=09
+Today's Savings:
+$15.94
+Continue Shopping <https://www.disneystore.com/>
+Shop Our Favorites
+
+ =
+<https://www.disneystore.com/accessories/?CMP=3DEMC-email_trans_orderconfi=
+rm_SF1>=09
+ =
+<https://www.disneystore.com/toys-collectibles/toys/?CMP=3DEMC-email_trans=
+_orderconfirm_SF2>
+ =
+<https://www.disneystore.com/new-content/?CMP=3DEMC-email_trans_orderconfi=
+rm_promo>
+Please do not reply to this email as this address is not monitored. If =
+you have any questions, please visit support.disneystore.com =
+<https://support.disneystore.com/hc/en-us>
+Disney Store, 4795 Imagination Drive, Memphis, TN 38118 (800) 328-0368
+All marks are the property of their respective owners. =C2=A9Disney. All =
+Rights Reserved. Additional Content Information =
+<https://support.disney.com/hc/en-us/articles/360000829466-Legal-Notices>=
+
+--Apple-Mail=_324570BC-257E-4703-94D4-AEAE2F62CE04
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta charset=3D"UTF-8"><meta http-equiv=3D"content-type" =
+content=3D"text/html; charset=3Dutf-8"></head><body =
+style=3D"overflow-wrap: break-word; -webkit-nbsp-mode: space; =
+line-break: after-white-space;"><center width=3D"100%" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); caret-color: rgb(34, 34, 34); font-size: 12px; =
+font-style: normal; font-variant-caps: normal; font-weight: 400; =
+letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: =
+none; white-space: normal; widows: auto; word-spacing: 0px; =
+-webkit-text-stroke-width: 0px; background-color: rgb(235, 241, 243); =
+text-decoration: none; margin: 0px; padding: 0px;"><table =
+class=3D"main-wrap" bgcolor=3D"#ffffff" width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); width: 457px; max-width: 600px; =
+margin: 0px auto; padding: 0px; box-shadow: rgb(224, 224, 224) 0px 2px =
+4px; -webkit-box-shadow: rgb(224, 224, 224) 0px 2px 4px; border-radius: =
+8px; border-collapse: separate; border-spacing: 0px; empty-cells: show; =
+overflow: hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px;"><table class=3D"head-wrap" =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px 0px -10px; padding: 0px; border-collapse: collapse; =
+overflow: hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 17px 0px 0px; text-align: =
+center;"><img class=3D"logo" width=3D"150" alt=3D"Disney Store Logo" =
+src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/ds-logo-inlin=
+e-midnight?fmt=3Dpng" style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); width: 150px; max-width: =
+150px; height: auto; margin: 0px; padding: =
+0px;"></td></tr></tbody></table><table cellpadding=3D"0" cellspacing=3D"0"=
+ class=3D"banner-wrap hero-banner-mobile" width=3D"100%" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); display: none; background: =
+url(&quot;https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/email-ban=
+ner-mobile?fit=3Dconstrain&amp;cropN=3D0,0,1,1&amp;fmt=3Dwebp&amp;qlt=3D10=
+0&amp;wid=3D1000&quot;) center bottom / 100% 88% no-repeat; margin: 0px; =
+padding: 0px; border-collapse: collapse; overflow: hidden; max-width: =
+600px; min-height: 200px;"><tbody style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td width=3D"100%" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px;"><img alt=3D"" class=3D"mickey-cart-logo" =
+src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/header-1?$ema=
+ilConfirmBanner$&amp;fit=3Dconstrain&amp;fmt=3Dpng-alpha&amp;crop=3D6,103,=
+1200,99" style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; =
+color: rgb(34, 34, 34); margin: 0px 0px 175px; padding: 0px; width: =
+457px; max-width: 100%; height: auto; max-height: =
+105px;"></td></tr></tbody></table><table cellpadding=3D"0" =
+cellspacing=3D"0" class=3D"tagline-info-wrap" width=3D"100%" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; border-collapse: =
+collapse;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; text-align: center;"><h1 =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); line-height: 33px; margin: 28px 0px 5px; padding: 0px; =
+font-size: 28px; font-weight: 500;">Hooray!</h1><h3 style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; font-size: 16px; font-weight: 500; =
+line-height: 24px;">Your order has been =
+placed!</h3></td></tr></tbody></table><table class=3D"message-wrap" =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+class=3D"message" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); padding: 0px 50px 20px; margin: 0px; =
+text-align: center;"><h3 style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px; =
+font-size: 16px; line-height: 25px; font-weight: 500;">Hi, Daniel! Thank =
+you for selecting our Moment of Magic Order option! We can't wait to =
+deliver magic into your life. Stay up to date with the status and =
+estimated delivery date of your order at the<span =
+class=3D"Apple-converted-space">&nbsp;</span><a class=3D"msg-link" =
+href=3D"https://www.disneystore.com/homepage" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, =
+34);">Disney Store</a>.</h3></td></tr><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); text-align: center; padding: 10px 0px 30px;"><div =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><a =
+href=3D"https://www.disneystore.com/on/demandware.store/Sites-shopDisney-S=
+ite/default/Order-Details?orderNumber=3D5033471943" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(255, 255, 255); =
+background-color: rgb(0, 117, 227); border-radius: 4px; display: =
+inline-block; font-size: 16px; font-weight: bold; line-height: 54px; =
+text-align: center; text-decoration: none; width: 300px;">View Order =
+Details</a></div></td></tr></tbody></table><table =
+class=3D"order-summary-shipping-and-billing-details-wrap" width=3D"100%" =
+cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; border-collapse: collapse; overflow: hidden;"><tbody =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px 25px 25px; text-align: center;"><h2 =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 8px; border-top-width: 1px; =
+border-top-style: solid; border-top-color: rgb(224, 224, 224); padding: =
+20px 0px 0px; font-size: 20px; font-weight: 400; line-height: =
+26px;">Order #5033471943</h2><table =
+class=3D"order-summary-shipping-and-billing-details-wrap" width=3D"100%" =
+cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; border-collapse: collapse; overflow: hidden;"><tbody =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; text-align: center; vertical-align: top; =
+width: 414px;"><img =
+src=3D"https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/clock?fmt=3D=
+png" alt=3D"clock" width=3D"18" height=3D"19" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+vertical-align: baseline; margin: 0px 5px 0px 0px;"><span =
+class=3D"Apple-converted-space">&nbsp;</span><span style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(106, 120, 137); =
+vertical-align: top; margin: 0px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 400;">Time Placed: 08/30/2023 at 7:14 AM =
+PT<span =
+class=3D"Apple-converted-space">&nbsp;</span></span></td></tr></tbody><tbo=
+dy style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; =
+color: rgb(34, 34, 34);"><tr style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; text-align: center; =
+vertical-align: top; width: 414px;"><img =
+src=3D"https://cdn-icons-png.flaticon.com/512/240/240324.png" =
+alt=3D"clock" width=3D"18" height=3D"19" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+vertical-align: baseline; margin: 0px 5px 0px 0px;"><span =
+class=3D"Apple-converted-space">&nbsp;</span><span style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(106, 120, 137); =
+vertical-align: top; margin: 0px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 400;">Est. Delivery: 03/21/2024 by 2:00 =
+PM PT<span =
+class=3D"Apple-converted-space">&nbsp;</span></span></td></tr></tbody></ta=
+ble></td></tr><tr class=3D"shipping-and-billing-summary" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px;"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px 20px 25px;"><table width=3D"100%" =
+cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; border-collapse: separate; overflow: hidden;"><tbody =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><td class=3D"col-1" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); border-top-width: medium !important; =
+border-right-width: 10px; border-bottom-width: 1px; border-top-style: =
+none !important; border-right-style: solid; border-bottom-style: solid; =
+border-top-color: currentcolor !important; border-right-color: rgb(255, =
+255, 255); border-bottom-color: rgb(224, 224, 224); border-image: none =
+!important; display: block !important; border-left-width: medium =
+!important; border-left-style: none !important; border-left-color: =
+currentcolor !important; width: 377px; padding: 20px; margin: 0px; =
+vertical-align: top; background-color: rgb(245, 245, 245);"><h4 =
+class=3D"shipping-address__title" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px 0px =
+10px; padding: 0px; font-size: 16px; line-height: 20px; font-weight: =
+600;">Shipping To:</h4><p class=3D"shipping-address__name" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 3px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 500;">Faye Winarno</p><p =
+class=3D"shipping-address__address1" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; font-size: 14px; line-height: 20px; font-weight: 500;">150 =
+Brookline Ave</p><p class=3D"shipping-address__address2" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 500;">Apt 905</p><p =
+class=3D"shipping-address__city" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; font-size: 14px; line-height: 20px; font-weight: =
+500;">Boston, MA 02215</p><p class=3D"shipping-address__country" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 500;">United States</p><p =
+class=3D"shipping-address__phone" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; font-size: 14px; line-height: 20px; font-weight: =
+500;">(205) 405-4474</p><p class=3D"shipping-address__email" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 500;"><a =
+href=3D"mailto:daniel.garciabarnett@gmail.com" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, =
+34);">daniel.garciabarnett@gmail.com</a></p><h4 =
+class=3D"shipping-method__title" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); border-top-width: =
+1px; border-top-style: solid; border-top-color: rgb(194, 198, 203); =
+padding: 20px 0px 10px; margin: 20px 0px 0px; font-size: 16px; =
+line-height: 20px; font-weight: 600;">U.S. Standard</h4><p =
+class=3D"shipping-method__arrivaltime" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; font-size: 14px; line-height: 20px; font-weight: =
+500;">Currently 5-7 business days, unless otherwise noted.<span =
+class=3D"Apple-converted-space">&nbsp;</span></p></td><td class=3D"col-2" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); border-top-width: medium !important; =
+border-right-width: medium !important; border-bottom-width: medium =
+!important; border-top-style: none !important; border-right-style: none =
+!important; border-bottom-style: none !important; border-top-color: =
+currentcolor !important; border-right-color: currentcolor !important; =
+border-bottom-color: currentcolor !important; border-image: none =
+!important; display: block !important; border-left-width: 10px; =
+border-left-style: solid; border-left-color: rgb(255, 255, 255); width: =
+377px; margin: 0px; padding: 20px; vertical-align: top; background: =
+rgb(245, 245, 245);"><h4 class=3D"billing-address" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px 0px 10px; padding: 0px; font-size: 16px; line-height: 20px; =
+font-weight: 600;">Billing Address:</h4><p class=3D"billing-address__name"=
+ style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 3px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 500;">Daniel Garcia-Barnett</p><p =
+class=3D"billing-address__address1" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; font-size: 14px; line-height: 20px; font-weight: 500;">118 =
+Main St</p><p class=3D"billing-address__city" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; font-size: 14px; line-height: 20px; =
+font-weight: 500;">Nyack, NY 10960</p><p =
+class=3D"billing-address__country" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; font-size: 14px; line-height: 20px; font-weight: =
+500;">United States</p><p class=3D"billing-address__phone" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 20px; padding: 0px; font-size: 14px; =
+line-height: 20px; font-weight: 500;">(205) 405-4474</p><table =
+class=3D"payment__info" style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); width: 377px; margin: =
+0px;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+colspan=3D"2" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); border: medium !important; display: =
+table-cell !important; width: auto !important;"><h4 style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 20px 0px 10px; font-weight: 600; font-size: 16px; line-height: =
+22px;">Payment Info</h4></td></tr><tr style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td valign=3D"top" =
+class=3D"payment__image" style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); border: medium !important; =
+display: table-cell !important; width: 50px;"><img =
+src=3D"https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/visa-logo-2x=
+?fmt=3Dpng" width=3D"30" style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); width: 30px; height: auto; =
+margin-right: 15px;"></td><td style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); border: medium =
+!important; display: table-cell !important; width: auto !important;"><h4 =
+class=3D"payment-method" style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px; =
+font-size: 14px; line-height: 22px; font-weight: 600;">Visa</h4><p =
+class=3D"payment-method__cctype-details" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; font-size: 14px; line-height: 22px; =
+font-weight: =
+400;">****7133</p></td></tr></tbody></table></td></tr></tbody></table></td=
+></tr></tbody></table><table class=3D"ordered-items-list-wrap" =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr class=3D"ordered-items-label" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px;"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px 25px 10px; text-align: left;"><h2 =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); border: medium !important; margin: 0px; line-height: =
+26px; font-size: 20px; font-weight: 400;">Your Items</h2></td></tr><tr =
+class=3D"ordered-items-list" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px;"><td style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px =
+20px;"><table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; border-collapse: collapse; =
+overflow: hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; vertical-align: top;"><table =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr class=3D"product-item" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; border-top-width: 1px; border-top-style: =
+solid; border-top-color: rgb(224, 224, 224);"><td =
+class=3D"product-details__column" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 30px 0px 0px; vertical-align: top; width: 120px; =
+border-top-width: 1px; border-top-style: solid; border-top-color: =
+rgb(224, 224, 224);"><img class=3D"product-item__image" height=3D"120" =
+width=3D"120" =
+src=3D"https://cdn-ssl.s7.disneystore.com/is/image/DisneyShopping/12310004=
+44635" alt=3D"Lotso Scented Plush =E2=80=93 Toy Story 3 =E2=80=93 Medium =
+13''" title=3D"Lotso Scented Plush =E2=80=93 Toy Story 3 =E2=80=93 =
+Medium 13''" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); max-width: 120px; width: 80px; =
+margin: 0px; padding: 0px; display: block; height: auto;"></td><td =
+class=3D"product-details__table" colspan=3D"2" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); width: =
+337px; border-top-width: 1px; border-top-style: solid; border-top-color: =
+rgb(224, 224, 224); padding: 30px 0px 0px; vertical-align: top;"><table =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+width=3D"250" class=3D"product-item__details" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); width: =
+250px; padding: 0px 0px 20px 15px; margin: 0px; vertical-align: =
+top;"><table width=3D"99%" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; border-collapse: collapse; =
+overflow: hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; vertical-align: top;"><h4 =
+class=3D"product-item__name" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px 0px =
+5px; line-height: 22px; padding: 0px; font-size: 16px; font-weight: =
+500;">Lotso Scented Plush =E2=80=93 Toy Story 3 =E2=80=93 Medium =
+13''</h4></td></tr><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; vertical-align: top;"><p =
+class=3D"product-item__number" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(106, 120, 137); margin: 0px 0px =
+5px; padding: 0px; font-size: 12px; font-weight: 500;">ID: =
+412313398178</p></td></tr><tr style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; vertical-align: top;"><p =
+class=3D"product-item__quantity" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(106, 120, 137); font-size: =
+12px; line-height: 16px; margin: 0px;"><span style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(106, 120, =
+137);">Quantity:<span =
+class=3D"Apple-converted-space">&nbsp;</span></span><span =
+class=3D"qty_24780046523ccc7e08eb68c538" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(106, 120, =
+137);">1<span class=3D"Apple-converted-space">&nbsp;</span></span><span =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(106, 120, 137);">at<span =
+class=3D"Apple-converted-space">&nbsp;</span></span><span =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(106, 120, 137); margin: 0px 5px; padding: 0px; text-decoration: =
+line-through; font-weight: 500;">$26.99<span =
+class=3D"Apple-converted-space">&nbsp;</span></span><span class=3D"pricing=
+ line-item-total-price-amount" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(106, 120, 137); margin: 0px =
+5px; padding: 0px; font-weight: =
+500;">$20.00</span></p></td></tr></tbody></table></td><td width=3D"170" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); vertical-align: top; padding-top: 0px;"><table =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+class=3D"product-price__container" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); width: =
+45.296875px; margin: 0px; padding: 0px; vertical-align: top; text-align: =
+right;"><h4 class=3D"product-item__price" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px 0px 10px; padding: 0px; font-size: 14px; font-weight: =
+600;"><span class=3D"price_slash" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(106, 120, 137); =
+border-right-width: 10px; border-right-style: solid; border-right-color: =
+rgb(255, 255, 255); margin: 0px; padding: 0px; text-decoration: =
+line-through; font-weight: 500;">$26.99</span>$20.00</h4></td></tr><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); text-align: right;"></tr></tbody></table></td></tr><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td width=3D"100" colspan=3D"2" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px 0px 10px 5px; width: 332px;"><table =
+class=3D"pz_table" width=3D"70%" cellpadding=3D"0" cellspacing=3D"10" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); width: 332px; margin: 0px; padding: 0px; =
+border-collapse: separate; border-spacing: 10px 0px; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, =
+34);"></tbody></table></td></tr></tbody></table></td></tr></tbody></table>=
+</td></tr></tbody></table></td></tr></tbody></table><table =
+class=3D"order-summary-mobile-wrapper" width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px; =
+border-collapse: collapse; overflow: hidden;"><tbody style=3D"font-family:=
+ AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td class=3D"order-summary-mobile__cell" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); padding: 0px; margin: 0px;"><table =
+class=3D"order-summary-total-wrap" width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); border: 1px solid rgb(224, 224, =
+224); margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr =
+class=3D"order-summary-total__label" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px;"><td style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); text-align: right; margin: 0px; =
+padding: 0px 25px;"><h2 style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); border-top-width: 1px; =
+border-right-width: medium !important; border-bottom-width: medium =
+!important; border-left-width: medium !important; border-top-style: =
+solid; border-right-style: none !important; border-bottom-style: none =
+!important; border-left-style: none !important; border-top-color: =
+rgb(224, 224, 224); border-right-color: currentcolor !important; =
+border-bottom-color: currentcolor !important; border-left-color: =
+currentcolor !important; border-image: none !important; margin: 0px 0px =
+20px; padding: 30px 0px 0px; font-size: 20px; font-weight: 600;">Order =
+Summary</h2></td></tr><tr class=3D"order-summary-total__calculations =
+order-summary" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px;"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); padding: 0px 25px; margin: 0px; text-align: =
+right;"><table class=3D"order-summary-total__table" width=3D"300" =
+cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); width: 355px; =
+max-width: 300px; margin: 0px; padding: 0px; float: right; =
+border-collapse: collapse; overflow: hidden; border: medium;"><tbody =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: =
+0px;"><td style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 28px 0px 0px; =
+border-top-width: 1px; border-top-style: solid; border-top-color: =
+rgb(224, 224, 224);"><p class=3D"order-summary__label" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 14px; padding: 0px; text-align: left; =
+font-size: 14px; font-weight: 500;">Subtotal</p></td><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 28px 0px 0px; text-align: right; =
+border-top-width: 1px; border-top-style: solid; border-top-color: =
+rgb(224, 224, 224);"><p class=3D"order-summary__value" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 14px; padding: 0px; font-size: 14px; =
+font-weight: 500;">$20.00</p></td></tr><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px;"><p =
+class=3D"order-summary__label" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px 0px =
+14px; padding: 0px; text-align: left; font-size: 14px; font-weight: =
+500;">Shipping &amp; Handling</p></td><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; text-align: right;"><p =
+class=3D"order-summary__value" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px 0px =
+14px; padding: 0px; font-size: 14px; font-weight: =
+500;">FREE</p></td></tr><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px;"><p class=3D"order-summary__label" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 28px; padding: 0px; text-align: left; =
+font-size: 14px; font-weight: 500;">Est. Sales Tax</p></td><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px; padding: 0px; text-align: right;"><p =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 0px 0px 28px; padding: 0px; font-size: 14px; =
+font-weight: 500;">$1.25</p></td></tr><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px;"><td style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px; border-top-width: 1px; border-top-style: solid; =
+border-top-color: rgb(224, 224, 224); border-bottom-width: medium; =
+border-bottom-style: none; border-bottom-color: currentcolor;"><h2 =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); margin: 25px 0px; padding: 0px; border: medium; =
+outline: currentcolor; line-height: 1.2; text-align: left; font-size: =
+18px; font-weight: 600;">Total</h2></td><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; text-align: right; border-top-width: 1px; =
+border-top-style: solid; border-top-color: rgb(224, 224, 224); =
+border-bottom-width: medium; border-bottom-style: none; =
+border-bottom-color: currentcolor;"><h2 style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 25px 0px; padding: 0px; border: medium; outline: currentcolor; =
+line-height: 1.2; font-size: 18px; font-weight: =
+600;">$21.25</h2></td></tr><tr style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px;"><td colspan=3D"2" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; =
+padding: 0px;"><table class=3D"order-summary-todays-savings" =
+width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+margin: 0px; padding: 0px; border-collapse: collapse; overflow: =
+hidden;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); width: 65px; margin: 0px; padding: 15px 0px 25px; =
+border-bottom-width: medium; border-bottom-style: none; =
+border-bottom-color: currentcolor; text-align: left;"><img =
+class=3D"icon-godmother" width=3D"65" height=3D"45" =
+src=3D"https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/godmother?fm=
+t=3Dpng-alpha" alt=3D"God Mother" style=3D"font-family: AvenirNext, =
+Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); width: 65px; =
+max-width: 65px; float: left; height: 45px; margin: 0px; padding: =
+0px;"></td><td style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 15px 0px 25px; =
+border-bottom-width: medium; border-bottom-style: none; =
+border-bottom-color: currentcolor;"><h2 style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(0, 137, 0); margin: =
+0px; padding: 0px; border: medium; outline: currentcolor; line-height: =
+1.2; text-align: left; font-size: 14px; font-weight: 600;">Today's =
+Savings:</h2></td><td style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 15px =
+0px 25px; border-bottom-width: medium; border-bottom-style: none; =
+border-bottom-color: currentcolor;"><h2 style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(0, 137, 0); margin: =
+0px; padding: 0px; border: medium; outline: currentcolor; line-height: =
+1.2; text-align: right; font-size: 14px; font-weight: =
+600;">$15.94</h2></td></tr></tbody></table></td></tr></tbody></table></td>=
+</tr></tbody></table></td></tr></tbody></table><table =
+class=3D"cta-continue-shopping-wrap" cellpadding=3D"0" cellspacing=3D"0" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); width: 550px; margin: 5px 25px; padding: 0px; =
+border-collapse: collapse; overflow: hidden;"><tbody style=3D"font-family:=
+ AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); padding: 35px 0px 30px; =
+border-top-width: 1px; border-top-style: solid; border-top-color: =
+rgb(224, 224, 224); margin: 0px; text-align: center;"><a =
+href=3D"https://www.disneystore.com/" target=3D"_blank" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(255, 255, 255); width: 300px; margin-left: auto; margin-right: auto; =
+background-color: rgb(0, 117, 227); border: 1px solid rgb(0, 117, 227); =
+border-radius: 3px; display: inline-block; font-weight: 700; font-size: =
+16px; line-height: 54px; text-align: center; text-decoration: =
+none;">Continue Shopping</a></td></tr></tbody></table><table =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); width: 457px; border-spacing: unset; padding-bottom: =
+40px;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+colspan=3D"3" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); padding: 0px;"><h2 =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); text-align: center; margin: 0px 0px 15px; padding: 0px; =
+line-height: 26px; font-size: 24px; font-weight: 400;">Shop Our =
+Favorites</h2></td></tr><tr style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34);"><td style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+text-align: center; max-width: 180px;"><table style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); width: =
+226.5px;"><tbody style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><tr style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><td =
+align=3D"center" class=3D"favorites-mobile" style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34); =
+display: none;"><a =
+href=3D"https://www.disneystore.com/accessories/?CMP=3DEMC-email_trans_ord=
+erconfirm_SF1" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); text-decoration: none;"><img =
+width=3D"160" =
+src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500x500_moana=
+-ears_20230502" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); height: auto;"><p =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); font-weight: 600; margin: 0px; padding: 0px; font-size: =
+12px; line-height: 17.13px;"></p></a></td></tr></tbody></table></td><td =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); text-align: center; max-width: 180px;"><table =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); width: 226.5px;"><tbody style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td align=3D"center" class=3D"favorites-mobile" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); display: none;"><a =
+href=3D"https://www.disneystore.com/toys-collectibles/toys/?CMP=3DEMC-emai=
+l_trans_orderconfirm_SF2" style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); text-decoration: none;"><img =
+width=3D"160" =
+src=3D"http://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/500x500_goofy=
+-plush_20230502" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); height: auto;"><p =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); font-weight: 600; margin: 0px; padding: 0px; font-size: =
+12px; line-height: =
+17.13px;"></p></a></td></tr></tbody></table></td></tr></tbody></table><tab=
+le class=3D"footer-banner-wrap" width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px; =
+border-collapse: collapse; overflow: hidden;"><tbody style=3D"font-family:=
+ AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td class=3D"favorites-mobile" width=3D"100%" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); display: none; margin: 0px; padding: 0px;"><a =
+href=3D"https://www.disneystore.com/new-content/?CMP=3DEMC-email_trans_ord=
+erconfirm_promo" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34);"><img class=3D"footer-banner-image" =
+width=3D"375" =
+src=3D"https://cdn-ssl.s7.disneystore.com/is/image/ShopDisney/6487_eml_tra=
+nsactional-banner-refresh_20231227_m?$emailPromoMobile$" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34); width: 457px; max-width: 375px; margin: 0px auto; =
+padding: 0px; display: block; height: =
+auto;"></a></td></tr></tbody></table></td></tr></tbody></table><table =
+class=3D"main-footer-wrap" width=3D"100%" cellpadding=3D"0" =
+cellspacing=3D"0" style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(34, 34, 34); max-width: 600px; margin: 0px auto; =
+padding: 0px; border-collapse: separate; border-spacing: 0px; =
+empty-cells: show; overflow: hidden;"><tbody style=3D"font-family: =
+AvenirNext, Helvetica, Arial, sans-serif; color: rgb(34, 34, 34);"><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 43.5px =
+50px 15px;"><p style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(106, 120, 137); margin: 0px; font-size: 10px; =
+line-height: 15px; font-weight: 500;">Please do not reply to this email =
+as this address is not monitored. If you have any questions, please =
+visit<span class=3D"Apple-converted-space">&nbsp;</span><a =
+target=3D"_blank" href=3D"https://support.disneystore.com/hc/en-us" =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(106, 120, 137); text-decoration: =
+underline;">support.disneystore.com</a></p></td></tr><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px =
+50px 15px;"><p style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(106, 120, 137); margin: 0px; font-size: 10px; =
+line-height: 15px; font-weight: 500;">Disney Store, 4795 Imagination =
+Drive, Memphis, TN 38118 (800) 328-0368</p></td></tr><tr =
+style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; color: =
+rgb(34, 34, 34);"><td style=3D"font-family: AvenirNext, Helvetica, =
+Arial, sans-serif; color: rgb(34, 34, 34); margin: 0px; padding: 0px =
+50px 15px;"><p style=3D"font-family: AvenirNext, Helvetica, Arial, =
+sans-serif; color: rgb(106, 120, 137); margin: 0px; font-size: 10px; =
+line-height: 15px; font-weight: 500;">All marks are the property of =
+their respective owners. =C2=A9Disney. All Rights Reserved.<span =
+class=3D"Apple-converted-space">&nbsp;</span><a target=3D"_blank" =
+href=3D"https://support.disney.com/hc/en-us/articles/360000829466-Legal-No=
+tices" style=3D"font-family: AvenirNext, Helvetica, Arial, sans-serif; =
+color: rgb(106, 120, 137); text-decoration: underline;">Additional =
+Content =
+Information</a></p></td></tr></tbody></table></center></body></html>=
+
+--Apple-Mail=_324570BC-257E-4703-94D4-AEAE2F62CE04--
